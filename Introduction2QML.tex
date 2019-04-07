@@ -1,18 +1,20 @@
-\documentclass[a4paper,12pt,titlepage,openbib,draft]{beamer}
+\documentclass[12pt,openbib]{beamer}
 
-\author{Pritvi Jheengut @zcoldplayer}
+\author{Pritvi Jheengut @zcoldplayer} %\thanks{\and}}
 \title{An introduction to QML}
 \subtitle{Advantages of QML in Embedded Computing}
+\subject{}
 
-\usepackage[size=a4, orientation=landscape, scale=3.5]{beamerposter}
+\usepackage[size=custom,width=64,height=36,orientation=landscape,
+  scale=1.75]{beamerposter}
 
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
 % Eliminate errors such as
-% LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <4> not available
-% LaTeX Font Warning: Size substitutions with differences up to 1.0pt
+% \LaTeX\ Font Warning: Font shape `T1/cmss/m/n' in size <4> not available
+% \LaTeX\ Font Warning: Size substitutions with differences up to 1.0pt
 
 \usepackage{hyperref}
 \hypersetup{
@@ -27,60 +29,109 @@
 
 % \usepackage{pgf}
 % \usepackage{xy}[all]
-% \usepackage{graphicx}
+\usepackage{graphicx}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows,positioning}
+
+\usepackage{smartdiagram}
 
 % \usepackage{booktabs}
 
-\mode<presentation>{
+% usetheme{DevConMU2019}
+
+\mode<presentation>
 
   \useoutertheme{infolines}
-  \usecolortheme{whale}
 
   \definecolor{light}{HTML}{0088FF}
   \definecolor{confblue}{HTML}{111144}
   \definecolor{confred}{HTML}{771111}
   \definecolor{confyellow}{HTML}{FF5533}
 
-  \setbeamercolor{alerted text}{bg=confblue!75,fg=confyellow!50}
-  \setbeamercolor{block title}{bg=confblue!80,fg=white}
-  \setbeamercolor{block body}{bg=confblue,fg=confyellow}
-  \setbeamercolor{frametitle}{parent=confyellow,bg=confblue!90,fg=confred!70}
-  \setbeamercolor{normal text}{fg=confyellow}
-  \setbeamercolor{structure}{bg=confblue,fg=light!75}
-  \setbeamercolor{Title bar}{fg=confred!90}
-  \setbeamercolor{titlelike}{parent=confyellow,bg=confblue!90,fg=white!85}
+  \setbeamercolor{alerted text}
+  {bg=confblue,fg=-confyellow}
+
+  \setbeamercolor{block title}
+  {bg=confred!95,fg=white}
+
+  \setbeamercolor{block body}
+  {bg=confblue!95,fg=confyellow}
+
+  \setbeamercolor{frametitle}
+  {parent=confyellow,fg=confyellow!35}
+
+  \setbeamercolor{normal text}
+  {bg=confblue,fg=confyellow}
+
+  \setbeamercolor*{palette primary}
+  {use=structure,fg=confblue,bg=structure.fg}
+
+  \setbeamercolor*{palette secondary}
+  {use=structure,fg=confblue,bg=structure.fg!85!-confblue}
+
+  \setbeamercolor*{palette tertiary}
+  {use=structure,fg=confblue,bg=structure.fg!70!-confblue}
+
+  \setbeamercolor{structure}
+  {bg=-confblue,fg=light!75}
+
+  \setbeamercolor{Title bar}
+  {fg=confred!90}
+
+  \setbeamercolor{titlelike}
+  {parent=-confyellow,bg=structure.fg!30!-confyellow,fg=black!85}
 
   \setbeamercovered{transparent,dynamic}
 
+  \setbeamersize{text margin left=8cm,text margin right=2cm}
+
   \setbeamertemplate{blocks}[rounded][shadow=true]
+
   \setbeamertemplate{background canvas}[vertical shading]
-                    [top=confred,middle=confblue!95,bottom=light]
+  [top=confred,middle=confblue,bottom=confred!75]
+
+  \setbeamertemplate{sidebar canvas left}{
+
+    \vspace{6cm}
+
+    \includegraphics[width=30cm,height=48cm]{5years.eps}
+
+    \vspace{-32cm}
+
+    \includegraphics[width=8.4cm,height=8cm]{mscc.eps}
+
+  }
 
 % \mode<handout>{\beamertemplatesolidbackgroundcolor{black!50}}
 
-}
-
-\subtitle{
-}
-
-% \date{ }
+\mode<all>
 
 \begin{document}
 
-\date[]{}
+\section{Title : Presentation for \#DevConMU}
 
-\maketitle
+\frame{
+  \frametitle{Developers Conference \#DevConMU \\ @ the Voila Hotel
+    \&  Flying Dodo}
 
-\section{CopyLeft License}
+  \huge
+  \maketitle
+
+}
+
+\section{}
+\section{Intellectual Property Alert : Overview of the Copyleft
+  Licenses}
 
 \frame{
   \frametitle{Copyleft License Attribution}
 
-  Made with love using beamer, LaTeX and git.\\
+  Made with love using beamer, \LaTeX\ and git.\\
   You can view at \href{https://github.com/Pritvi-DevConMU-MSCC/Introduction2QML/}
   {Introduction to QML}
 
-  \begin{alertblock}{This work is licensed under the LaTeX Project
+  \begin{alertblock}{This work is licensed under the \LaTeX\ Project
       Public License.}
     To view a copy of this license, visit \\
     \url{https://www.latex-project.org/lppl.txt}
@@ -98,9 +149,11 @@
     CA 94042, \\
     USA. \\
   \end{alertblock}
+
 }
 
 \section{Greetings}
+\subsection{About the Author}
 
 \frame{
   \frametitle{Who Am I}
@@ -123,9 +176,9 @@
 
   Fervour Advocate of Free Libre and Open Source Software.
 
-  \href{}{}
-
 }
+
+\subsection{About the Audience}
 
 \frame{
   \frametitle{Who are you}
@@ -133,14 +186,16 @@
   \large
 
   \begin{block}{Would you mind tell me who you are?}
-    \begin{enumerate}
-    \item @twitter\_handle
-    \item where you work
-    \item email you want to share
-    \item Hobbies
-    \item purpose and expectations of this session
-    \end{enumerate}
+    Some hints:
   \end{block}
+
+  \begin{enumerate}
+  \item @twitter\_handle
+  \item where you work
+  \item email you want to share
+  \item Hobbies
+  \item purpose and expectations of this session
+  \end{enumerate}
 
 }
 
@@ -150,19 +205,19 @@
   \frametitle{Community Groups in Mauritius}
 
   \begin{block}{Healthy growth of Community Groups in Mauritius}
-    This turn of the century has seen an uprising of Community groups in
-    Mauritius in the field of the Digital World. The diversity has
+    This turn of the century has seen an uprising of Community groups
+    in Mauritius in the field of the Digital World. The diversity has
     helped the exchange and sharing of innovative ideas, experience,
     bleeding edge technology, upcoming events, conferences in the
     Digital Island of the Republic of Mauritius.
   \end{block}
 
-  \large
+  This is a list of some of the active communities in Digital
+  Mauritius.
 
-  This is a list of some of the active communities in Digital Mauritius.
   \begin{itemize}
   \item Linux User Group Meta, LUGM
-  \item Mauritius Software Craftmanship Community, MSCC
+  \item Mauritius Software Craftsmanship Community, MSCC
   \item Mauritius Makers Community, MMC
   \item Front-End Coders Mauritius, FECM
   \item PHP User Group of Mauritius, phpMauritiusUG
@@ -173,6 +228,31 @@
 
 }
 
+\section{QT}
+
+\frame{
+  \frametitle{framework of libraries built on the top of Qt}
+
+\url{https://www.qt.io/}
+
+\begin{block}{Qt has always been the most powerfull SDK to built Graphical
+Software}
+
+ Written in C++, it is
+
+ \begin{itemize}
+  \item Cross-platform, Embedded Devices, Smartphones, Automobile, IOT, TV
+  \item Fast, highly modular design and Future proof
+  \item licensed under the LGPL
+  \item heavily used by some commercial Customers including LG, Mercedes-Benz,
+  AMD, Denso, Panasonic, Sky
+  \item used by commonly used applications and examples include VLC, Google
+  Earth, Skype, Maya, Teamviwer, Telegram
+ \end{itemize}
+\end{block}
+
+}
+
 \section{ }
 
 \frame{
@@ -199,6 +279,44 @@
   \large
 
 }
+\section{QML}
+
+\frame{
+  \frametitle{ }
+
+ \begin{block}{QML, Qt Modeling Language }
+ is a declarative user interface markup language for designing user
+ interface–centric applications, the QML runtime implements the ECMAScript
+ Language Specification standard.
+\end{block}
+
+
+  \large
+
+}
+\section{ }
+
+\frame{
+  \frametitle{ }
+
+  \large
+
+}
+
+\frame{
+  \frametitle{ }
+
+
+}
+\section{ }
+
+\frame{
+  \frametitle{ }
+
+  \large
+
+}
+
 \section{ }
 
 \frame{
@@ -231,8 +349,6 @@
   \large
 
 }
-
-
 \section{ }
 
 \frame{
@@ -241,38 +357,7 @@
   \large
 
 }
-\section{ }
 
-\frame{
-  \frametitle{ }
-
-  \large
-
-}
-\section{ }
-
-\frame{
-  \frametitle{ }
-
-  \large
-
-}
-\section{ }
-
-\frame{
-  \frametitle{ }
-
-  \large
-
-}
-\section{ }
-
-\frame{
-  \frametitle{ }
-
-  \large
-
-}
 \section{ }
 
 \frame{
@@ -289,15 +374,12 @@
 
   \huge
 
-  \begin{block}
+  \begin{center}
 
     QUESTIONS!
 
-  \end{block}
+  \end{center}
 
 }
 
 \end{document}
-
-
-
